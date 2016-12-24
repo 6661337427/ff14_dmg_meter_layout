@@ -1,6 +1,3 @@
-// fiddle: http://jsfiddle.net/v1ddnsvh/8/
-/* global window */
-
 var IMAGE_PATH = 'images';
 
 var React = window.React;
@@ -30,7 +27,7 @@ var ____Class1W=React.Component;for(var ____Class1W____Key in ____Class1W){if(__
     Object.defineProperty(CombatantCompact.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
         //var width = parseInt(this.props.data.damage / this.props.encounterDamage * 100, 10) + '%';
         var width = parseInt(this.props.total / this.props.max * 100, 10) + '%';
-
+        
         return (
             this.props.perSecond === '---' ? null :
             React.createElement("li", {
@@ -48,9 +45,7 @@ var ____Class1W=React.Component;for(var ____Class1W____Key in ____Class1W){if(__
                             this.props.additional ?
                             React.createElement("span", {className: "additional"}, 
                                 "[", this.props.additional, "]"
-                            ) : null, 
-
-
+                        ) : null/*,
                             "(", 
                             React.createElement("span", {className: "ps"}, 
                                 this.props.perSecond, ","
@@ -59,7 +54,7 @@ var ____Class1W=React.Component;for(var ____Class1W____Key in ____Class1W){if(__
                             React.createElement("span", {className: "percent"}, 
                                 this.props.percentage
                             ), 
-                            ")"
+                            ")"*/
                         ), 
                         React.createElement("div", {className: "info"}, 
                             React.createElement("span", {className: "job-icon"}, 
@@ -148,31 +143,31 @@ var ____Class1Y=React.Component;for(var ____Class1Y____Key in ____Class1Y){if(__
                 React.createElement("div", {className: "extra-details"}, 
                     React.createElement("div", {className: "extra-row damage"}, 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Damage"), 
+                            React.createElement("span", {className: "label ff-header"}, "Damage:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 formatNumber(encounter.damage)
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "DPS"), 
+                            React.createElement("span", {className: "label ff-header"}, "DPS:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 formatNumber(encounter.encdps)
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Crits"), 
+                            React.createElement("span", {className: "label ff-header"}, "Crits:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 encounter['crithit%']
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Miss"), 
+                            React.createElement("span", {className: "label ff-header"}, "Miss:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 encounter['misses']
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Max"), 
+                            React.createElement("span", {className: "label ff-header"}, "Max:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 encounter.maxhit
                             )
@@ -180,27 +175,35 @@ var ____Class1Y=React.Component;for(var ____Class1Y____Key in ____Class1Y){if(__
                     ), 
                     React.createElement("div", {className: "extra-row healing"}, 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Heals"), 
+                            React.createElement("span", {className: "label ff-header"}, "Heals:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 formatNumber(encounter.healed)
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "HPS"), 
+                            React.createElement("span", {className: "label ff-header"}, "HPS:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 formatNumber(encounter.enchps)
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Crits"), 
+                            React.createElement("span", {className: "label ff-header"}, "Crits:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 encounter['critheal%']
                             )
                         ), 
                         React.createElement("div", {className: "cell"}, 
-                            React.createElement("span", {className: "label ff-header"}, "Max"), 
+                            React.createElement("span", {className: "label ff-header"}, "Max:"), 
                             React.createElement("span", {className: "value ff-text"}, 
                                 encounter.maxheal
+                            )
+                        )
+                    ),
+                    React.createElement("div", {className: "extra-row death"}, 
+                        React.createElement("div", {className: "cell"}, 
+                            React.createElement("span", {className: "label ff-header"}, "Deaths:"), 
+                            React.createElement("span", {className: "value ff-text"}, 
+                                encounter['deaths']
                             )
                         )
                     )
@@ -259,9 +262,9 @@ var ____Class1Z=React.Component;for(var ____Class1Z____Key in ____Class1Z){if(__
                             characterName: combatant.name,
                             total: combatant.healed,
                             totalFormatted: formatNumber(combatant.healed),
-                            perSecond: formatNumber(combatant.enchps),
-                            additional: combatant['OverHealPct'],
-                            percentage: combatant['healed%']
+                            perSecond: formatNumber(combatant.enchps) + ' (' + combatant['OverHealPct'] + ', ' + combatant['healed%'] + ')'
+                            /*perSecond: combatant['OverHealPct'],
+                            percentage: combatant['healed%']*/
                         }
                     }
                 }
@@ -274,9 +277,35 @@ var ____Class1Z=React.Component;for(var ____Class1Z____Key in ____Class1Z){if(__
                             job: combatant.Job || '',
                             characterName: combatant.name,
                             total: combatant.damagetaken,
-                            totalFormatted: formatNumber(combatant.damagetaken),
-                            perSecond: combatant.ParryPct,
-                            percentage: combatant.BlockPct
+                            totalFormatted: formatNumber(combatant.damagetaken) + ' (' + combatant.ParryPct + ', ' + combatant.BlockPct + ')'
+                            /*perSecond: combatant.ParryPct,
+                            percentage: combatant.BlockPct*/
+                        }
+                    }
+                }
+                else if (this.props.currentView === 'Deaths') {
+                    if (parseInt(combatant.deaths, 10) > 0) {
+                        if (!maxdps) {
+                            maxdps = parseFloat(combatant.deaths);
+                        }
+                        stats = {
+                            job: combatant.Job || '',
+                            characterName: combatant.name,
+                            total: combatant.deaths,
+                            totalFormatted: combatant.deaths
+                        }
+                    }
+                }
+                else if (this.props.currentView === 'Misses') {
+                    if (parseInt(combatant.misses, 10) > 0) {
+                        if (!maxdps) {
+                            maxdps = parseFloat(combatant.misses);
+                        }
+                        stats = {
+                            job: combatant.Job || '',
+                            characterName: combatant.name,
+                            total: combatant.misses,
+                            totalFormatted: combatant.misses
                         }
                     }
                 }
@@ -288,9 +317,9 @@ var ____Class1Z=React.Component;for(var ____Class1Z____Key in ____Class1Z){if(__
                         job: combatant.Job || '',
                         characterName: combatant.name,
                         total: combatant.damage,
-                        totalFormatted: formatNumber(combatant.damage),
-                        perSecond: formatNumber(combatant.dps),
-                        percentage: combatant['damage%']
+                        totalFormatted: formatNumber(combatant.damage) + ' (' + formatNumber(combatant.dps) + ', ' + combatant['damage%'] + ')'
+                       /* perSecond: formatNumber(combatant.dps),
+                        percentage: combatant['damage%']*/
                     }
                 }
 
@@ -408,7 +437,9 @@ DamageMeter.defaultProps = {
     chartViews: [
         'Damage',
         'Healing',
-        'Tanking'
+        'Tanking',
+        'Deaths',
+        'Misses'
     ],
     parseData: {},
     noJobColors: false

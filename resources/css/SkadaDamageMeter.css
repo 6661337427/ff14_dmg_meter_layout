@@ -232,6 +232,14 @@ li:last-child {
     background-color: rgb(209, 38, 204);
 }
 
+.show-job-colors .sam .bar {
+    background-color: rgb(255, 187, 51);
+}
+
+.show-job-colors .rdm .bar {
+    background-color: rgb(255, 26, 140);
+}
+
 .show-job-colors .mch .bar {
     background-color: #6EE1D6;
 }

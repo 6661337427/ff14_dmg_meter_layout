@@ -233,11 +233,11 @@ li:last-child {
 }
 
 .show-job-colors .sam .bar {
-    background-color: rgb(255, 187, 51);
+    background-color: #e46d04;
 }
 
 .show-job-colors .rdm .bar {
-    background-color: rgb(255, 26, 140);
+    background-color: #e87b7b;
 }
 
 .show-job-colors .mch .bar {
